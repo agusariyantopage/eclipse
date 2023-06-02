@@ -1,0 +1,6 @@
+TRUNCATE akun_jurnal;
+TRUNCATE akun_mutasi;
+TRUNCATE beli;
+TRUNCATE beli_detail;
+TRUNCATE jual;
+TRUNCATE jual_detail;
