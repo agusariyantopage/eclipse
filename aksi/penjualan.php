@@ -35,7 +35,9 @@
         else if($_POST['aksi']=='keranjang-ubah'){
             $x0=$_POST['id'];
             $x1=$_POST['qty'];
-            $sql="update keranjang set jumlah=$x1,diubah_pada=DEFAULT where id_keranjang=$x0";
+            $x2=$_POST['harga'];
+            $x2=str_replace(',','',$x2);
+            $sql="update keranjang set jumlah=$x1,harga=$x2,diubah_pada=DEFAULT where id_keranjang=$x0";
             mysqli_query($koneksi,$sql);
             header('location:../index.php?p=penjualan');
         }

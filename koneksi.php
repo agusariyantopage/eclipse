@@ -8,6 +8,10 @@
     $APP_COMPANY_EMAIL="info@eclipse-pottery.com";
     $APP_LOGO="dist/img/logo_eclipse.png";
     $APP_ICO="dist/img/logo_eclipse.png";
+
+    // Setting Default
+    $ENABLE_EDIT_HARGA_JUAL=true;
+
     
     // Variabel Koneksi
     $servername     ="localhost";

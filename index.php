@@ -539,6 +539,11 @@
         dropdownParent: $('#tambahJurnalModal'),
         theme: 'bootstrap4'        
     });
+    easyNumberSeparator({
+      selector: '.number-separator',
+      separator: ',',
+      resultInput: '#result_input',
+    });
     
   });
 </script>
@@ -557,124 +562,7 @@
     }, false);
     document.getElementById('bayar').addEventListener("keyup", function (evt) {
       hitung_kembalian();      
-    }, false);
-
-    // Modul Pembayaran Cicilan
-    
-    function tampilkan_cicilan(evt){
-      var jumlahCicil=document.getElementById("jumlah_cicil").value; 
-      var total=document.getElementById("grandtotal").value;
-
-      var tanggalTransaksi=document.getElementById("tanggal_transaksi").value;
-      var tahunTransaksi=tanggalTransaksi.substring(0,4);
-      var bulanTransaksi=tanggalTransaksi.substring(5,7);
-      var hariTransaksi=tanggalTransaksi.substring(8,10);
-      var tanggalCicilan=["Tanggal1","Tanggal2","Tanggal3","Tanggal4","Tanggal5"];
-
-      tanggalCicilan[0]=tanggalTransaksi;
-      
-      // Set Tanggal Cicilan Ke 2
-      var thn=Number(tahunTransaksi);
-      var bln=Number(bulanTransaksi)+1;
-      if (bln>12){
-        thn=thn+1;
-        bln=bln-12;
-        
-      }
-      bln=''+bln
-      if(bln.length==1){
-        bln="0"+bln;
-      } else {
-        bln=bln;
-      }
-     tanggalCicilan[1]=thn+"-"+bln+"-"+hariTransaksi;
-
-      // Set Tanggal Cicilan Ke 3
-      var thn=Number(tahunTransaksi);
-      var bln=Number(bulanTransaksi)+2;
-      if (bln>12){
-        thn=thn+1;
-        bln=bln-12;
-        
-      }
-      bln=''+bln
-      if(bln.length==1){
-        bln="0"+bln;
-      } else {
-        bln=bln;
-      }
-      tanggalCicilan[2]=thn+"-"+bln+"-"+hariTransaksi;
-
-      // Set Tanggal Cicilan Ke 4
-      var thn=Number(tahunTransaksi);
-      var bln=Number(bulanTransaksi)+3;
-      if (bln>12){
-        thn=thn+1;
-        bln=bln-12;
-        
-      }
-      bln=''+bln
-      if(bln.length==1){
-        bln="0"+bln;
-      } else {
-        bln=bln;
-      }
-      tanggalCicilan[3]=thn+"-"+bln+"-"+hariTransaksi;
-
-      // Set Tanggal Cicilan Ke 5
-      var thn=Number(tahunTransaksi);
-      var bln=Number(bulanTransaksi)+4;
-      if (bln>12){
-        thn=thn+1;
-        bln=bln-12;
-        
-      }
-      bln=''+bln
-      if(bln.length==1){
-        bln="0"+bln;
-      } else {
-        bln=bln;
-      }
-      tanggalCicilan[4]=thn+"-"+bln+"-"+hariTransaksi;
-      
-      var cicilan=Math.round(total/jumlahCicil);
-      var elemenTanggal="";
-      var elemenJumlah="";
-      
-      for (i = 1; i < 6; i++) {
-        elemenTanggal="tanggal_bayar"+i;
-        elemenJumlah="jumlah_bayar"+i;
-        document.getElementById(elemenJumlah).value=0;
-        document.getElementById(elemenTanggal).innerHTML="Pembayaran ke - "+i+"(Lunas)";
-        document.getElementById(elemenJumlah).readOnly = true;
-      }
-      for (i = 0; i < jumlahCicil; i++) {
-        elemenJumlah="jumlah_bayar"+(i+1);
-        elemenTanggal="tanggal_bayar"+(i+1);
-        var inputElemenTanggal="tanggal_jatuh_tempo["+i+"]";
-        document.getElementById(elemenJumlah).value=cicilan;
-        var curtgl=tanggalCicilan[i];
-        document.getElementById(elemenTanggal).innerHTML="Pembayaran ke - "+(i+1)+"("+curtgl+")";
-        //document.getElementById(elemenTanggal).innerHTML=inputElemenTanggal;
-        document.getElementById(elemenJumlah).readOnly = false;
-        document.getElementById(inputElemenTanggal).value=curtgl;
-      }
-      
-      
-    }
-    
-    document.getElementById('tanggal_transaksi').addEventListener("mouseup", function (evt) {
-      tampilkan_cicilan();      
-    }, false);
-    document.getElementById('tanggal_transaksi').addEventListener("keyup", function (evt) {
-      tampilkan_cicilan();      
-    }, false);
-    document.getElementById('jumlah_cicil').addEventListener("mouseup", function (evt) {
-      tampilkan_cicilan();      
-    }, false);
-    document.getElementById('jumlah_cicil').addEventListener("keyup", function (evt) {
-      tampilkan_cicilan();      
-    }, false);
+    }, false);    
         
 </script>
 

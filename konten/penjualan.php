@@ -1,3 +1,10 @@
+<?php
+  if(!empty($_POST['diskon'])){
+    $diskon=str_replace(',','',$_POST['diskon']);
+  } else {
+    $diskon=0;
+  }
+?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -77,25 +84,28 @@
                   $no = 0;
                   $grandtotal = 0;
                   $total = 0;
-                  $diskon=0;
+                  // $diskon = 0;
                   while ($kolom2 = mysqli_fetch_array($query2)) {
                     $no++;
                     $harga = number_format($kolom2['harga']);
                     $jumlah = number_format($kolom2['jumlah']);
                     $subtotal = number_format($kolom2['jumlah'] * $kolom2['harga']);
                     $total = $total + ($kolom2['jumlah'] * $kolom2['harga']);
-                    if($no>=6){
-                      $diskon=0.1*$total;
-                    }
+                    
                     $token = md5($kolom2['id_keranjang']);
+                    if ($ENABLE_EDIT_HARGA_JUAL) {
+                      $view_harga = "<input type='text' name='harga' class='form-control form-control-sm mb-2 number-separator' value='$harga'>";
+                    } else {
+                      $view_harga = "<input type='text' name='harga' class='form-control form-control-sm mb-2 number-separator' value='$harga' readonly>";
+                    }
                     echo "
                     <tr>
+                    <form action='aksi/penjualan.php' method='post'>
                       <td><a href='aksi/penjualan.php?aksi=keranjang-hapus&token=$token'><i class='fas fa-trash'></a></i></td>
                       <td>$no</td>
                       <td>$kolom2[nama]</td>
-                      <td align=right>$harga</td>
+                      <td align=right style='width:150px;'>$view_harga</td>
                       <td align=right style='width:150px;'>                      
-                        <form action='aksi/penjualan.php' method='post'>
                         <input type='hidden' name='aksi' value='keranjang-ubah'> 
                         <input type='hidden' name='id' value='$kolom2[id_keranjang]'> 
                         <div class='form-row'>
@@ -112,7 +122,7 @@
                     </tr>
                     ";
                   }
-                  $grandtotal=$total-$diskon;
+                  $grandtotal = $total - $diskon;
                   ?>
 
                 </tbody>
@@ -124,9 +134,13 @@
                     </td>
                   </tr>
                   <tr>
-                    <td align='center' colspan="5">DISKON</td>
+                    <td align='center' colspan="5">
+                      DISKON <button type="button" class="btn btn-link" data-toggle="modal" data-target="#setDiskon"><i class="fas fa-calculator"></i></button>
+                    </td>
                     <td align='right'>
-                      <p><?= number_format($diskon); ?></p>
+                      <p>
+                        <?= number_format($diskon); ?>
+                      </p>
                     </td>
                   </tr>
                   <tr>
@@ -354,6 +368,28 @@
 
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Set Diskon -->
+<div class="modal fade" id="setDiskon" tabindex="-1" aria-labelledby="setDiskonLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="setDiskonLabel">Setup Diskon</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          <input type='text' style="text-align:right;" name='diskon' class='form-control form-control-sm mb-2 number-separator' value='<?= number_format($diskon); ?>'>
+
+      </div>
+      <div class="modal-footer">
+        <button class='btn btn-info' type='submit'><i class='fas fa-check'></i> Proses</button>
+        </form>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
       </div>
     </div>
