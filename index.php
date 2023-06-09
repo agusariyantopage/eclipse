@@ -519,6 +519,10 @@
         dropdownParent: $('#simpanJualModal'),
         theme: 'bootstrap4'        
     });
+    $('#id_akun').select2({
+        dropdownParent: $('#laporanKasToko'),
+        theme: 'bootstrap4'        
+    });
     $('#id_anggota1').select2({
         dropdownParent: $('#simpanJualModalKas'),
         theme: 'bootstrap4'        

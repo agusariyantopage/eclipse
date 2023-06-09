@@ -78,7 +78,7 @@
                   <td><?= $kolom['id_beli']; ?></td>
                   <td><?= $kolom['napem']; ?></td>
                   <td><?= $kolom['tanggal_transaksi']; ?></td>
-                  <td><?= $kolom['metode_bayar']; ?></td>
+                  <td><?= get_nama_akun($koneksi,$kolom['id_akun']); ?></td>
                   <td><?= number_format($kolom['total']); ?></td>
                   <td><?= $kolom['petugas']; ?></td>                  
                   <td><?= $kolom['dibuat_pada']; ?></td>

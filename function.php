@@ -17,6 +17,15 @@ function call_option_selected($koneksi, $nama_tabel, $order_by, $value, $display
     }
 }
 
+function call_option_selected_parametered($koneksi, $nama_tabel, $order_by, $value, $display, $selected_id,$parameter)
+{
+    $sql = "SELECT * FROM " . $nama_tabel . " WHERE ".$parameter." ORDER BY " . $order_by;
+    $query = mysqli_query($koneksi, $sql);
+    while ($kolom = mysqli_fetch_array($query)) {
+        echo ($selected_id == $kolom[$value]) ? "<option value='$kolom[$value]' selected>$kolom[$display]</option>" : "<option value='$kolom[$value]'>$kolom[$display]</option>";
+    }
+}
+
 // Fungsi Akuntansi Posting Jurnal
 function get_id_jurnal($koneksi)
 {
@@ -39,6 +48,17 @@ function posting_jurnal($koneksi, $tanggal_transaksi, $deskripsi, $id_akun_debet
     //echo $id_akun_jurnal;    
     $sql_kredit = "INSERT INTO akun_mutasi(id_akun_mutasi, id_akun_jurnal, id_akun, kredit, debet, dibuat_pada, diubah_pada) VALUES(DEFAULT, $id_akun_jurnal, $id_akun_kredit, $nominal_transaksi, 0, DEFAULT, DEFAULT)";
     mysqli_query($koneksi, $sql_kredit);
+}
+
+function unposting_jurnal($koneksi,$id_akun_jurnal){
+    $sql1="DELETE FROM akun_jurnal WHERE id_akun_jurnal=$id_akun_jurnal";
+    mysqli_query($koneksi,$sql1);
+
+    $sql2="DELETE FROM akun_mutasi WHERE id_akun_jurnal=$id_akun_jurnal";
+    mysqli_query($koneksi,$sql2);
+    // echo $sql1;
+    // echo $sql2;
+
 }
 
 function get_nama_akun($koneksi, $id_akun)

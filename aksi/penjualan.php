@@ -98,6 +98,7 @@
 
         else if($_POST['aksi']=='hapus-penjualan'){
             $id_jual=$_POST['id_jual'];           
+            $id_akun_jurnal=$_POST['id_akun_jurnal'];           
             $perintah_update_stok=$_POST['perintah_update_stok'];
 
             // Delete Tabel Jual
@@ -108,9 +109,13 @@
             $sql4="delete from jual_detail where id_jual=$id_jual";
             mysqli_query($koneksi,$sql4);
 
+            // Next Update (Menghapus Jurnal Akuntansi Terkait)
+            unposting_jurnal($koneksi,$id_akun_jurnal);
+            
             // Update Stok
             mysqli_multi_query($koneksi,$perintah_update_stok); 
             pesan_transaksi($koneksi);
+
 
             // Redirection
             header('location:../index.php?p=daftar-penjualan');

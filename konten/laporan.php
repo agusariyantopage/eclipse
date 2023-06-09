@@ -281,11 +281,17 @@
    <div class="modal-dialog">
      <div class="modal-content">
        <div class="modal-header">
-         <h5 class="modal-title" id="editModalLabel">Pilih Periode Laporan Kas Toko</h5>
+         <h5 class="modal-title" id="editModalLabel">Pilih Periode Laporan Per Akun</h5>
          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
        </div>
        <div class="modal-body">
          <form method="get" target="blank" action="pdf/output/lap_kas_toko.php">
+          <div>
+            <label for="id_akun">Akun</label>
+            <select name="id_akun" id="id_akun"  class="form-control" required>
+              <?php call_option_selected($koneksi,"akun","id_akun","id_akun","akun",3); ?>
+            </select>
+          </div>
            <div>
              <label for="tanggal_awal">Tanggal Awal</label>
              <input type="date" name="tanggal_awal" class="form-control" required>
@@ -344,3 +350,5 @@
      </div>
    </div>
  </div>
+
+ 

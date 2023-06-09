@@ -36,6 +36,7 @@ echo '
 
             <input type="hidden" name="aksi" value="hapus-penjualan">
             <input type="hidden" name="id_jual" value="<?= $kolom1['id_jual']; ?>">
+            <input type="hidden" name="id_akun_jurnal" value="<?= $kolom1['id_akun_jurnal']; ?>">
             <input type="hidden" name="id_anggota" value="<?= $kolom1['id_anggota']; ?>">
             <?php
 

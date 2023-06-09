@@ -110,7 +110,7 @@
                         <input type='hidden' name='id' value='$kolom2[id_keranjang]'> 
                         <div class='form-row'>
                               <div class='col'>
-                                  <input type='number' name='qty' class='form-control form-control-sm mb-2' value='$kolom2[jumlah]'>
+                                  <input type='number' step='0.01' name='qty' class='form-control form-control-sm mb-2' value='$kolom2[jumlah]'>
                               </div>
                               <div class='col'>
                                   <button class='btn btn-sm btn-warning' type='submit' data-toggle='tooltip' data-placement='top' title='Klik Untuk Mengubah Jumlah . . .'><i class='fas fa-edit'></i></button>

@@ -42,7 +42,7 @@ echo '
 		while ($kolom2 = mysqli_fetch_array($query2)) {
 			$no++;
 			$harga = number_format($kolom2['harga_jual']);
-			$jumlah = number_format($kolom2['jumlah']);
+			$jumlah = number_format($kolom2['jumlah'],2);
 			$subtotal = number_format($kolom2['jumlah'] * $kolom2['harga_jual']);
 			$grandtotal = $grandtotal + ($kolom2['jumlah'] * $kolom2['harga_jual']);
 			$token = md5($kolom2['id_jual']);
