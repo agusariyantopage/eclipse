@@ -319,7 +319,7 @@
           <div class="form-row">
             <div class="form-group col-sm-12">
               <label for="">Metode Bayar</label>
-              <select name="id_akun" id="id_akun" class="select2bs4 form-control" required>
+              <select name="id_akun" class="form-control" required>
                 <option value="">-- Pilih Metode Bayar --</option>
                 <?php
                 $sql_non_tunai = "SELECT * from akun WHERE keterangan='Pembayaran Non Tunai' ORDER BY akun";
